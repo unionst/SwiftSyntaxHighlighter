@@ -45,6 +45,9 @@ let package = Package(
                 "Highlighter",
                 "Xcode",
                 "Pygments",
+                    .product(name: "IDEUtils", package: "SwiftSyntax"),
+                    .product(name: "SwiftSyntaxParser", package: "SwiftSyntax")
+
 //                .target(name: "_InternalSwiftSyntaxParser", condition: .when(platforms: [.macOS]))
             ]),
         .testTarget(

@@ -1,5 +1,6 @@
 import Highlighter
 import SwiftSyntax
+    import IDEUtils
 
 
 /// A tokenization scheme compatible with the
@@ -73,11 +74,6 @@ public enum Pygments: TokenizationScheme {
              .asKeyword,
              .isKeyword,
              .capitalSelfKeyword,
-             .__dso_handle__Keyword,
-             .__column__Keyword,
-             .__file__Keyword,
-             .__function__Keyword,
-             .__line__Keyword,
              .inoutKeyword,
              .operatorKeyword,
              .throwsKeyword,
@@ -162,7 +158,9 @@ public enum Pygments: TokenizationScheme {
             token = Token("unavailable", kind: Other.self)
         case .regexLiteral(_):
             token = Token("unavailable", kind: Other.self)
-        }
+        case .poundHasSymbolKeyword:
+                token = Token("has symbol", kind: Other.self)
+            }
 
         if tokenSyntax.tokenClassification.kind == .typeIdentifier,
             let previousTokenKind = tokenSyntax.previousToken?.tokenKind
@@ -220,7 +218,7 @@ public enum Pygments: TokenizationScheme {
             case .blockComment(let text),
                  .docBlockComment(let text):
                 return Token(text, kind: Comment.MultiLine.self)
-            case .garbageText:
+            default:
                 return nil
             }
         }

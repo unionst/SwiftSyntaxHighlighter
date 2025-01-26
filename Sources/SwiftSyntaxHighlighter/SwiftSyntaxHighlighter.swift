@@ -21,6 +21,7 @@ open class SwiftSyntaxHighlighter: SyntaxAnyVisitor {
     /// - SeeAlso: `Pygments`
     public init(using scheme: TokenizationScheme.Type) {
         self.scheme = scheme
+            super.init(viewMode: .sourceAccurate)
     }
 
     // MARK: - SyntaxAnyVisitor

@@ -1,5 +1,6 @@
 import Highlighter
 import SwiftSyntax
+import IDEUtils
 
 public enum Xcode: TokenizationScheme {
     /// Returns the highlighted tokens for a SwiftSyntax node.
@@ -15,7 +16,7 @@ public enum Xcode: TokenizationScheme {
     static func tokens(for tokenSyntax: TokenSyntax) -> [Token] {
         var token: Token?
 
-        switch tokenSyntax.tokenClassification.kind {
+            switch tokenSyntax.tokenClassification.kind {
         case .keyword:
             token = Token(tokenSyntax.text, kind: Keyword.self)
         case .identifier:
@@ -96,7 +97,7 @@ public enum Xcode: TokenizationScheme {
             case .docLineComment(let text),
                  .docBlockComment(let text):
                 return Token(text, kind: Documentation.self)
-            case .garbageText:
+            default:
                 return nil
             }
         }
