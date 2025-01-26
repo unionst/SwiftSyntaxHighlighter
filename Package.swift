@@ -16,9 +16,9 @@ let package = Package(
                     targets: ["swift-highlight"])
     ],
     dependencies: [
-        .package(name: "SwiftSyntax",
+        .package(
                  url: "https://github.com/unionst/SwiftSyntax.git",
-                 .branch("main")),
+                 .branchItem("main")),
         .package(name: "swift-argument-parser",
                  url: "https://github.com/apple/swift-argument-parser.git",
                  .upToNextMinor(from: "0.3.2"))
@@ -41,7 +41,7 @@ let package = Package(
         .target(
             name: "SwiftSyntaxHighlighter",
             dependencies: [
-                "SwiftSyntax",
+                .product(name: "SwiftSyntax", package: "SwiftSyntax"),
                 "Highlighter",
                 "Xcode",
                 "Pygments",
