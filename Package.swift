@@ -40,9 +40,20 @@ let package = Package(
             ]),
         .target(
             name: "SwiftSyntaxHighlighter",
-            dependencies: ["SwiftSyntax", "Highlighter", "Xcode", "Pygments"]),
+            dependencies: [
+                "SwiftSyntax",
+                "Highlighter",
+                "Xcode",
+                "Pygments",
+                .target(name: "_InternalSwiftSyntaxParser", condition: .when(platforms: [.macOS]))
+            ]),
         .testTarget(
             name: "SwiftSyntaxHighlighterTests",
             dependencies: ["SwiftSyntaxHighlighter"]),
+        .binaryTarget(
+          name: "_InternalSwiftSyntaxParser",
+          url: "https://github.com/apple/swift-syntax/releases/download/0.50600.0/_InternalSwiftSyntaxParser.xcframework.zip",
+          checksum: "0e0d9ecbfddd0765485ded160beb9e7657e7add9d5ffd98ef61e8bd0c967e3a9"
+        ),
     ]
 )
